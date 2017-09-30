@@ -6,7 +6,17 @@ These instructions will help you in preparing a server for the Oxycoin testnet n
 
 To complete this tutorial, you will need:
 
-A linux server with preferably Ubuntu 16.04 with at least 2 GB memory and 20 GB storage. 
+* A Linux server with preferably Ubuntu 16.04 with at least 2 GB memory and 20 GB storage. 
+
+* Some knowledge of how to work with command line tools in a terminal such as Putty on Windows or Terminal on Linux/MacOSX. 
+
+### Prerequisite verification (skip if known)
+
+0. Login to your server:
+
+```
+ssh username@[your_server_ip-addres]
+```
 
 To check your linux distribution you can use (on the command line):
 
@@ -56,74 +66,87 @@ tmpfs           2.0G     0  2.0G   0% /sys/fs/cgroup
 Look at the column 'Mounted on' for the single / which indicates your used and available storage in GB (unless you have a seperate home directory mountpoint e.g. /home)
 
 
-
 ### Installation
 
-A step by step series of examples that tell you have to get a development env running
+The installation document assumes you're installing a new server without (sudo) users already configured. If you do already have a sudo user configured on your server, you can replace all commands executed by root below with: sudo [your_sudo_user]
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
+1. To start login to your server with the root user:
 
 ```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
-
-
-01. To start login to your server with the root user:
-
 ssh root@[your_server_ip-addres]
-02. Now update and upgrade your system to the latest repositories:
+```
+
+2. Now update and upgrade your system to the latest repositories:
+
+```
 apt-get update
 apt-get upgrade
 apt-get dist-upgrade
-03. After this is completed it's time to setup your main user with sudo privileges. Add the user chosing your username:
+```
+
+3. After this has completed it's time to setup your main user with sudo privileges. Add the user chosing your username:
+
+```
 useradd -d /home/[your_username] -m -s /bin/bash [your_username]
-04. Set the password for the username (make a note of this password):
+```
+
+4. Set the password for the username (and make a note of this password):
+
+```
 passwd [your_username]
-05. Add the user to the sudo group:
+```
+
+5. Add the user to the sudo group:
+
+```
 usermod -aG sudo [your_username]
-06. Now it's time to verify this user can login to your server. Exit the login session with the root user and login with the new user:
+```
+
+6. Now it's time to verify this user can login to your server. Exit the login session with the root user and login with the new user:
+
+```
 ssh [your_username]@[your_server_ip-addres]
-07. Check if the user has root privileges (password of user is required):
+```
+
+7. Check if the user has sudo privileges (password of user is required):
+
+```
 sudo -l
+```
+
 This will ask for your password and if you do have sudo rights, will return with something similar to:
 
+```
 User [your_username] may run the following commands on [your hostname]:
     (ALL : ALL) ALL
+```
 
 If this doesn't happen your user doesn't have the required sudo privileges (return to step 5).
-08. Now install the packages required for the remainder of the installation process.
+
+8. Now install the packages required for the remainder of the installation process.
+
+```
 sudo apt-get install vim iptables git
-09. Configure your editing preferences. Assuming you will continu using vi(m), create a vimrc file:
+```
+
+9. Configure your editing preferences. Assuming you will continu using vi(m), create a vimrc file:
+```
 cd
 vi .vimrc
+```
 Add the following line to the empty .vimrc file:
+```
 set nocompatible
+```
 Exit vi by hitting ESC and then typing (and hitting ENTER afterwards):
+```
 :wq
+```
 Activate the changes to the .vimrc file by typing:
+```
 source .vimrc
+```
+
 10. Change the bash preferences file to always use vim instead of vi (read here why).
 cd
 vi .bashrc 
@@ -175,3 +198,23 @@ sudo ./firewall_rules.sh
 After the script has executed it will display the firewall rules activated and this rules will be persistant. It's important to verify you can still login to your server with the firewall active so open a new terminal and login again:
 
 ssh -p[your_sshd_port] root@[your_server_ip-addres]
+
+
+
+## External references
+
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+
+
+## Acknowledgments
+
+* Hat tip to anyone who's code was used
+* Inspiration
+* etc
+
+
+01. To start login to your server with the root user:
+
+ssh root@[your_server_ip-addres]
