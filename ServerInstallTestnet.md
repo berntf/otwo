@@ -203,10 +203,10 @@ ssh -p[your_sshd_port] root@[your_server_ip-address]
 
 ## External references
 
-* <a href="https://vimhelp.appspot.com/vim_faq.txt.html#faq-1.4" target="_new">vim over vi advantages</a>
+* <a href="https://vimhelp.appspot.com/vim_faq.txt.html#faq-1.4" target="_blank">vim over vi advantages</a>
 
 
 ## Acknowledgments
 
-* <a href="https://github.com/seatrips/" target="_new">Seatrips</a>
-* <a href="https://github.com/lepetitjan/" target="_new">Lepetitjan</a>
+* <a href="https://github.com/seatrips/" target="_blank">Seatrips</a>
+* <a href="https://github.com/lepetitjan/" target="_blank">Lepetitjan</a>
