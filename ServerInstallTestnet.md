@@ -235,7 +235,7 @@ cd
 sudo ./firewall_rules.sh
 ```
 
-After the script has executed it will display the firewall rules activated and this rules will be persistant. It's important to verify you can still login to your server with the firewall active so open a new terminal and login again:
+After the script has executed it will display the firewall rules activated and these rules will be persistant. It's important to verify you can still login to your server with the firewall active so open a new terminal and login again:
 
 ```
 ssh -p[your_sshd_port] root@[your_server_ip-address]
@@ -244,7 +244,7 @@ ssh -p[your_sshd_port] root@[your_server_ip-address]
 
 ## External references
 
-* <a href="https://vimhelp.appspot.com/vim_faq.txt.html#faq-1.4" target="_blank">vim over vi advantages</a>
+* 1. <a href="https://vimhelp.appspot.com/vim_faq.txt.html#faq-1.4" target="_blank">vim over vi advantages</a>
 
 
 ## Acknowledgments
