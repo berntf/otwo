@@ -16,7 +16,9 @@ cat /etc/issue
 
 This will output something like:
 
+```
 Ubuntu 16.04.3 LTS \n \l
+```
 
 To check the amount of memory type:
 
