@@ -147,7 +147,7 @@ Activate the changes to the .vimrc file by typing:
 source .vimrc
 ```
 
-10. Change the bash preferences file to always use vim instead of vi (read here why).
+10. Change the bash preferences file to always use vim instead of vi (see 'External reference 1' for advantages).
 cd
 vi .bashrc 
 Add the following line to the .bashrc file:
@@ -203,9 +203,7 @@ ssh -p[your_sshd_port] root@[your_server_ip-address]
 
 ## External references
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [vim over vi advantages](https://vimhelp.appspot.com/vim_faq.txt.html#faq-1.4) - vim over vi advantages
 
 
 ## Acknowledgments
