@@ -10,12 +10,12 @@ To complete this tutorial, you will need:
 
 * Some knowledge of how to work with command line tools in a terminal such as Putty on Windows or Terminal on Linux/MacOSX. 
 
-### Prerequisite verification (skip if known)
+### Prerequisite verification (proceed to 'Installation' if known)
 
 0. Login to your server:
 
 ```
-ssh username@[your_server_ip-addres]
+ssh username@[your_server_ip-address]
 ```
 
 To check your linux distribution you can use (on the command line):
@@ -73,7 +73,7 @@ The installation document assumes you're installing a new server without (sudo) 
 1. To start login to your server with the root user:
 
 ```
-ssh root@[your_server_ip-addres]
+ssh root@[your_server_ip-address]
 ```
 
 2. Now update and upgrade your system to the latest repositories:
@@ -105,7 +105,7 @@ usermod -aG sudo [your_username]
 6. Now it's time to verify this user can login to your server. Exit the login session with the root user and login with the new user:
 
 ```
-ssh [your_username]@[your_server_ip-addres]
+ssh [your_username]@[your_server_ip_address]
 ```
 
 7. Check if the user has sudo privileges (password of user is required):
@@ -197,7 +197,7 @@ cd
 sudo ./firewall_rules.sh
 After the script has executed it will display the firewall rules activated and this rules will be persistant. It's important to verify you can still login to your server with the firewall active so open a new terminal and login again:
 
-ssh -p[your_sshd_port] root@[your_server_ip-addres]
+ssh -p[your_sshd_port] root@[your_server_ip-address]
 
 
 
