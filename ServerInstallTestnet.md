@@ -27,11 +27,11 @@ free -h
 This will output something like:
 ```
               total        used        free      shared  buff/cache   available
-Mem:           3.8G        291M        188M        160M        3.3G        3.1G
+Mem:           **3.8G**        291M        188M        160M        3.3G        3.1G
 Swap:          3.7G        2.0M        3.7G
 ```
 
-In which the row 'Mem:' and column 'total' displays your total memory
+In which the row 'Mem:' and column 'total' displays your total memory which is in this example 4GB
 
 To check the amount of storage type:
 
