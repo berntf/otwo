@@ -24,10 +24,10 @@ To check the amount of memory type:
 free -h
 ```
 
-This will output something like:
+*This will output something like:
               total        used        free      shared  buff/cache   available
 Mem:           3.8G        291M        188M        160M        3.3G        3.1G
-Swap:          3.7G        2.0M        3.7G
+Swap:          3.7G        2.0M        3.7G*
 
 
 In which the row 'Mem:' and column 'total' displays your total memory
@@ -40,7 +40,7 @@ df -h
 
 This will output something like:
 
-Filesystem      Size  Used Avail Use% Mounted on
+*Filesystem      Size  Used Avail Use% Mounted on
 udev            1.9G     0  1.9G   0% /dev
 tmpfs           391M   24M  368M   6% /run
 /dev/md2        911G  5.2G  859G   1% /
@@ -48,7 +48,7 @@ tmpfs           2.0G  4.0K  2.0G   1% /dev/shm
 tmpfs           5.0M     0  5.0M   0% /run/lock
 tmpfs           2.0G     0  2.0G   0% /sys/fs/cgroup
 /dev/md0        472M   55M  393M  13% /boot
-/dev/md1        3.7G  7.5M  3.4G   1% /tmp
+/dev/md1        3.7G  7.5M  3.4G   1% /tmp*
 
 Look at the column 'Mounted on' for the single / which indicates your used and available storage in GB (unless you have a seperate home directory mountpoint e.g. /home)
 
