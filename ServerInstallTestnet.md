@@ -148,33 +148,65 @@ source .vimrc
 ```
 
 10. Change the bash preferences file to always use vim instead of vi (see 'External reference 1' for advantages).
+
+```
 cd
 vi .bashrc 
+```
 Add the following line to the .bashrc file:
+```
 alias vi='vim'
+```
 Exit vi by hitting ESC and then typing (and hitting ENTER afterwards):
+```
 :wq
+```
 Activate the changes to the .bashrc file by typing:
+```
 source .bashrc
+```
+
 11. Running the SSH daemon on your server on the default port (22) will generate quite some brute force login attempts. To run the SSH daemon on a different port follow the steps below:
+
+```
 sudo vi /etc/ssh/sshd_config
+```
 Find the line stating the port number most likely looking like this:
+```
 #Port 22
+```
+
 Uncomment the line (remove the #) and change 22 in a number somewhere between 10000 and 65000 e.g.:
+
+```
 Port 12322
+```
+
 12. Save and exit vi by hitting ESC and typing (and hitting ENTER afterwards):
+```
 :wq
+```
+
 13. Restart the SSH daemon:
+
+```
 sudo /etc/init.d/ssh restart
+```
+
 14. Verify you can still login by opening a new terminal and typing:
 
+```
 ssh -p[your_sshd_port] root@[your_server_ip-addres]
+```
+
 15. We are now ready to configure the firewall rules allowing you to manage your server using SSH and your server to communicate with the rest of the OXY network. The easiest way is to put the rules in a script by typing the following commands:
 
+```
 cd
 vi firewall_rules.sh
+```
 Paste the following lines in the firewall_rules.sh script file (replace the [your_sshd_port] variable with the port number chosen in step 11):
-
+```
 #!/bin/bash
 iptables -F
 
@@ -187,18 +219,27 @@ iptables -I INPUT 1 -i lo -j ACCEPT
 
 iptables -L -v -n
 sh -c "iptables-save > /etc/iptables.rules"
-Exit vi by hitting ESC and then typing (and hitting ENTER afterwards) and then make the script executable:
+```
 
+Exit vi by hitting ESC and then typing (and hitting ENTER afterwards) and then make the script executable:
+```
 chmod +x firewall_rules.sh
+```
+
 Note that these rules will block all other traffic to your server other than management over SSH and communication with the OXY network. If you have any other services running, make sure these will still function by adding their incoming TCP/UDP ports to the firewall rules. 
+
 16. Next is the activation of the firewall:  
 
+```
 cd
 sudo ./firewall_rules.sh
+```
+
 After the script has executed it will display the firewall rules activated and this rules will be persistant. It's important to verify you can still login to your server with the firewall active so open a new terminal and login again:
 
+```
 ssh -p[your_sshd_port] root@[your_server_ip-address]
-
+```
 
 
 ## External references
