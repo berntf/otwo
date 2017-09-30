@@ -203,16 +203,11 @@ ssh -p[your_sshd_port] root@[your_server_ip-address]
 
 ## External references
 
-* [vim over vi advantages](https://vimhelp.appspot.com/vim_faq.txt.html#faq-1.4) - vim over vi advantages
+* [vim over vi advantages](https://vimhelp.appspot.com/vim_faq.txt.html#faq-1.4)
 
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* [Lepetitjan](https://github.com/lepetitjan/)
+* [Seatrips](https://github.com/seatrips/)
 
-
-01. To start login to your server with the root user:
-
-ssh root@[your_server_ip-addres]
