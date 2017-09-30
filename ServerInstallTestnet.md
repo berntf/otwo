@@ -1,6 +1,6 @@
 ## Preparing your server for testnet
 
-These instructions will help you in preparing a server for the Oxycoing testnet network. 
+These instructions will help you in preparing a server for the Oxycoin testnet network. 
 
 ### Prerequisites
 
@@ -12,6 +12,7 @@ To check your linux distribution you can use (on the command line):
 
 ```
 cat /etc/issue
+```
 
 This will output something like:
 
@@ -21,6 +22,7 @@ To check the amount of memory type:
 
 ```
 free -h
+```
 
 This will output something like:
 
@@ -35,6 +37,7 @@ To check the amount of storage type:
 
 ```
 df -h
+```
 
 This will output something like:
 
