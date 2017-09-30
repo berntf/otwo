@@ -205,7 +205,7 @@ ssh -p[your_sshd_port] root@[your_server_ip-address]
 
 * [vim over vi advantages](https://vimhelp.appspot.com/vim_faq.txt.html#faq-1.4)
 
-<a href="https://vimhelp.appspot.com/vim_faq.txt.html#faq-1.4" target="_blank">vim over vi advantages</a>
+<a href="https://vimhelp.appspot.com/vim_faq.txt.html#faq-1.4" target="_new">vim over vi advantages</a>
 
 
 ## Acknowledgments
