@@ -275,7 +275,7 @@ ssh-copy-id -i ~/.ssh/id_rsa -p[your_sshd_port] [your_username]@[your_server_ip-
 
 ```
 ssh -p[your_sshd_port] [your_username]@[your_server_ip-address]
-```
+
 mkdir .ssh
 chmod 700 .ssh
 vi .ssh/authorized_keys
