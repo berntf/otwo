@@ -1,6 +1,6 @@
-## Preparing your server for testnet
+## Preparing your server for testnet or mainnet
 
-These instructions will guide you through the steps preparing a server for the OXY testnet or mainnet network. After you're done with these preparations, please continue with the testnet/mainnet installation for an OXY node. 
+These instructions will guide you through the steps preparing a server for the OXY testnet or mainnet network. After you're done with these preparations, please continue with the testnet/mainnet installation for an OXY node
 
 ### Prerequisites
 
@@ -15,7 +15,7 @@ To complete this tutorial, you will need:
 0. Login to your server:
 
 ```
-ssh username@[your_server_ip-address]
+ssh username@[your_server_ip_address]
 ```
 
 To check your linux distribution you can use:
@@ -73,7 +73,7 @@ The installation document assumes you're installing a new server without (sudo) 
 1. To start login to your server with the root user:
 
 ```
-ssh root@[your_server_ip-address]
+ssh root@[your_server_ip_address]
 ```
 
 2. Update and upgrade your system to the latest repositories:
@@ -102,7 +102,13 @@ passwd [your_username]
 usermod -aG sudo [your_username]
 ```
 
-6. Now it's time to verify this user can login to your server. Exit the login session with the root user and login with the new user:
+6. Now it's time to verify this user can login to your server. Exit the login session with the root user:
+
+```
+exit
+```
+
+and login with the new user:
 
 ```
 ssh [your_username]@[your_server_ip_address]
@@ -129,7 +135,8 @@ If this doesn't happen your user doesn't have the required sudo privileges (retu
 sudo apt-get install vim iptables git
 ```
 
-9. Configure your editing preferences. Assuming you will continu using vi/vim, create a vimrc file (see 'External reference i' for a vi/vim quick reference card):
+9. Configure your editing preferences. Assuming you will continu using vi/vim, create a vimrc file 
+    (see 'External reference i' for a vi/vim quick reference card):
 ```
 cd
 vi .vimrc
@@ -176,7 +183,7 @@ Find the line stating the port number looking like this:
 #Port 22
 ```
 
-Uncomment the line (remove the #) and change 22 in a number somewhere between 10000 and 65000 e.g.:
+Uncomment the line (remove the #) and change 22 in a number somewhere between 11000 and 65000 e.g.:
 
 ```
 Port 12322
@@ -196,7 +203,7 @@ sudo /etc/init.d/ssh restart
 14. Verify you can still login by opening a new terminal and typing:
 
 ```
-ssh -p[your_sshd_port] [your_username]@[your_server_ip-addres]
+ssh -p[your_sshd_port] [your_username]@[your_server_ip_address]
 ```
 
 15. We are now ready to configure the firewall rules allowing you to manage your server using SSH and your server to communicate with the rest of the OXY network. The easiest way is to put the rules in a script by typing the following commands:
@@ -254,7 +261,7 @@ sudo ./firewall_rules.sh
 After the script has executed it will display the firewall rules activated and these rules will be persistant. It's important to verify you can still login to your server with the firewall active so open a new terminal and login again:
 
 ```
-ssh -p[your_sshd_port] [your_username]@[your_server_ip-address]
+ssh -p[your_sshd_port] [your_username]@[your_server_ip_address]
 ```
 
 Exit all your login sessions:
@@ -284,13 +291,13 @@ Your public key needs to copied onto your server in the users home SSH directory
 18.1 On Linux distributions there's a tool available for copying your public key to the server, adding it to the users authorized_keys file and setting the correct permissions:
 
 ```
-ssh-copy-id -i ~/.ssh/id_rsa -p[your_sshd_port] [your_username]@[your_server_ip-address]
+ssh-copy-id -i ~/.ssh/id_rsa -p[your_sshd_port] [your_username]@[your_server_ip_address]
 ```
 
 18.2 On MacOSX/Windows this tool is not available by default. Open the id_rsa.pub you created in a text-editor and copy the contents to the clipboard on your machine. To copy the key to the authorized_keys file, login to your server and type the following commands:
 
 ```
-ssh -p[your_sshd_port] [your_username]@[your_server_ip-address]
+ssh -p[your_sshd_port] [your_username]@[your_server_ip_address]
 
 mkdir .ssh
 chmod 700 .ssh/
@@ -329,7 +336,7 @@ sudo /etc/init.d/ssh restart
 21. It's very important to verify you can still login to your server (now using PublicKey Authentication) so open a new terminal and login again:
 
 ```
-ssh -i ~/.ssh/id_rsa -p[your_sshd_port] [your_username]@[your_server_ip-address]
+ssh -i ~/.ssh/id_rsa -p[your_sshd_port] [your_username]@[your_server_ip_address]
 ```
 
 22. If you can login succesfully using PublicKey Authentication, exit all login sessions and continue installing the OXY node
