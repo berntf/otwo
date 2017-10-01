@@ -288,7 +288,9 @@ By default SSH allows public key authentication, let's make sure it does:
 ```
 sudo vi /etc/ssh/sshd_config
 ```
+
 And make sure the following line is present and not commented:
+
 ```
 PubkeyAuthentication yes
 ```
@@ -302,16 +304,16 @@ AllowUsers [your_username]
 ```
 
 Make sure you replace [your_username] with the username you want to allow logging in. Exit vi and restart the SSH Daemon:
+
 ```
 sudo /etc/init.d/ssh restart
 ```
 
 It's very important to verify you can still login to your server (now using public key authentication) so open a new terminal and login again:
+
 ```
 ssh -i ~/.ssh/id_rsa -p[your_sshd_port] [your_username]@[your_server_ip-address]
 ```
-
-
 
 
 sessions
