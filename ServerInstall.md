@@ -351,7 +351,7 @@ exit
 * 2. <a href="https://vimhelp.appspot.com/vim_faq.txt.html#faq-1.4" target="_blank">Some advantages in using vim over vi</a>
 
 
-## Acknowledgments
+## Acknowledgements
 
 * <a href="https://github.com/seatrips/" target="_blank">Seatrips</a>
 * <a href="https://github.com/lepetitjan/" target="_blank">Lepetitjan</a>
