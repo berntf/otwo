@@ -129,7 +129,7 @@ If this doesn't happen your user doesn't have the required sudo privileges (retu
 sudo apt-get install vim iptables git
 ```
 
-9. Configure your editing preferences. Assuming you will continu using vi(m), create a vimrc file (see External reference i for a vi/vim quick reference card):
+9. Configure your editing preferences. Assuming you will continu using vi(m), create a vimrc file (see 'External reference i' for a vi/vim quick reference card):
 ```
 cd
 vi .vimrc
@@ -221,7 +221,7 @@ iptables -L -v -n
 sh -c "iptables-save > /etc/iptables.rules"
 ```
 
-Exit vi by hitting ESC and then typing (and hitting ENTER afterwards) and then make the script executable:
+Exit vi by hitting ESC and then typing :wq (and hitting ENTER afterwards) and then make the script executable:
 ```
 chmod +x firewall_rules.sh
 ```
@@ -275,11 +275,43 @@ ssh-copy-id -i ~/.ssh/id_rsa -p[your_sshd_port] [your_username]@[your_server_ip-
 
 ```
 ssh -p[your_sshd_port] [your_username]@[your_server_ip-address]
+```
 mkdir .ssh
 chmod 700 .ssh
 vi .ssh/authorized_keys
 ```
-Now press i for insert mode and paste the contents of your clipboard holding the id_rsa.pub to this file. Exit vi 
+
+Now paste the contents of your clipboard holding the id_rsa.pub to this file and exit vi by hitting ESC and then typing :wq (and hitting ENTER afterwards)
+
+By default SSH allows public key authentication, let's make sure it does:
+
+```
+sudo vi /etc/ssh/sshd_config
+```
+And make sure the following line is present and not commented:
+```
+PubkeyAuthentication yes
+```
+
+If you want to further secure SSH by only allowing [your_username] to login usign a public key only make sure the following lines are also present in the sshd_config file:
+
+```
+PermitRootLogin no
+PasswordAuthentication no
+AllowUsers [your_username]
+```
+
+Make sure you replace [your_username] with the username you want to allow logging in. Exit vi and restart the SSH Daemon:
+```
+sudo /etc/init.d/ssh restart
+```
+
+It's very important to verify you can still login to your server (now using public key authentication) so open a new terminal and login again:
+```
+ssh -i ~/.ssh/id_rsa -p[your_sshd_port] [your_username]@[your_server_ip-address]
+```
+
+
 
 
 sessions
