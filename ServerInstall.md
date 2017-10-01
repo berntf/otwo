@@ -326,7 +326,7 @@ PasswordAuthentication no
 AllowUsers [your_username]
 ```
 
-Make sure you replace [your_username] with the username you want to allow logging in. Exit vi and restart the SSH Daemon:
+Make sure you replace [your_username] with the username you want to allow logging in. Exit vi and restart the SSH daemon:
 
 ```
 sudo /etc/init.d/ssh restart
