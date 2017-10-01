@@ -338,7 +338,7 @@ sudo /etc/init.d/ssh restart
 ssh -i ~/.ssh/id_rsa -p[your_sshd_port] [your_username]@[your_server_ip_address]
 ```
 
-22. If you can login succesfully using PublicKey Authentication, exit all login sessions and continue installing the OXY node
+22. If you can login successfully using PublicKey Authentication, exit all login sessions and continue installing the OXY node
 
 ```
 exit
