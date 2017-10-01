@@ -159,7 +159,7 @@ source .vimrc
 cd
 vi .bashrc 
 ```
-Add the following line to the .bashrc file (by default there's an aliases section by anywhere will work fine):
+Add the following line to the .bashrc file (by default there's an aliases section but anywhere will work fine):
 ```
 alias vi='vim'
 ```
@@ -211,7 +211,7 @@ ssh -p[your_sshd_port] [your_username]@[your_server_ip_address]
 cd
 vi firewall_rules.sh
 ```
-15.1 For testnet paste the following lines in the firewall_rules.sh script file (replace the [your_sshd_port] variable with the port number chosen in step 11):
+15.1 For *testnet* paste the following lines in the firewall_rules.sh script file (replace the [your_sshd_port] variable with the port number chosen in step 11):
 ```
 #!/bin/bash
 iptables -F
@@ -227,7 +227,7 @@ iptables -L -v -n
 sh -c "iptables-save > /etc/iptables.rules"
 ```
 
-15.2 For mainnet paste the following lines in the firewall_rules.sh script file (replace the [your_sshd_port] variable with the port number chosen in step 11):
+15.2 For *mainnet* paste the following lines in the firewall_rules.sh script file (replace the [your_sshd_port] variable with the port number chosen in step 11):
 ```
 #!/bin/bash
 iptables -F
@@ -276,7 +276,7 @@ You are all set up and you can proceed to the guide for installing the node
 
 If you don't want to type your password every time you login to your server you can configure PublicKey Authentication for SSH. Besides the fact it's more secure, it's very convenient as you don't have to type your password anymore
 
-17. Start by generating a SSH keypair (if you don't already have a keypair) on your local machine:
+17. Start by generating a SSH keypair (if you don't already have a keypair) on your local machine (for Windows/Putty use the PuTTYgen utility):
 
 ```
 ssh-keygen
@@ -299,7 +299,7 @@ ssh-copy-id -i ~/.ssh/id_rsa -p[your_sshd_port] [your_username]@[your_server_ip_
 ssh -p[your_sshd_port] [your_username]@[your_server_ip_address]
 
 mkdir .ssh
-chmod 700 .ssh/
+chmod 0700 .ssh/
 chown [your_username]:[your_username] .ssh/
 vi .ssh/authorized_keys
 ```
