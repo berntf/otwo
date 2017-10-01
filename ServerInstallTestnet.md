@@ -1,6 +1,6 @@
 ## Preparing your server for testnet
 
-These instructions will help you in preparing a server for the Oxycoin testnet network. 
+These instructions will guide you through the steps preparing a server for the Oxycoin testnet network. After you're done with these preparations, please continue with the testnet installation for a Oxycoin testnet node. 
 
 ### Prerequisites
 
@@ -43,7 +43,7 @@ Mem:           3.8G        291M        188M        160M        3.3G        3.1G
 Swap:          3.7G        2.0M        3.7G
 ```
 
-In which the row 'Mem:' and column 'total' displays your total memory which is in this example 3.8GB
+In which the row 'Mem:' and column 'total' displays your total memory which is in this example 3.8GB (~4GB)
 
 To check the amount of storage type:
 
@@ -63,12 +63,12 @@ tmpfs           2.0G     0  2.0G   0% /sys/fs/cgroup
 /dev/md0        472M   55M  393M  13% /boot
 /dev/md1        3.7G  7.5M  3.4G   1% /tmp
 ```
-Look at the column 'Mounted on' for the single / which indicates your used and available storage in GB (unless you have a seperate home directory mountpoint e.g. /home)
+Look at the column 'Mounted on' for the single / which indicates your used and available storage in GB (unless you have a seperate home directory partition mounted on e.g. /home in which case you need to also check this mountpoint for available space)
 
 
 ### Installation
 
-The installation document assumes you're installing a new server without (sudo) users already configured. If you do already have a sudo user configured on your server, you can replace all commands executed by root below with: sudo [your_sudo_user]
+The installation document assumes you're installing a new server without (sudo) users already configured. If you do already have a sudo user configured on your server, you can replace all commands executed by root below with: sudo [command]
 
 1. To start login to your server with the root user:
 
@@ -129,12 +129,12 @@ If this doesn't happen your user doesn't have the required sudo privileges (retu
 sudo apt-get install vim iptables git
 ```
 
-9. Configure your editing preferences. Assuming you will continu using vi(m), create a vimrc file:
+9. Configure your editing preferences. Assuming you will continu using vi(m), create a vimrc file (see External reference i for a vi/vim quick reference card):
 ```
 cd
 vi .vimrc
 ```
-Add the following line to the empty .vimrc file:
+Add the following line to the empty .vimrc file (type i for insert mode and then type the following):
 ```
 set nocompatible
 ```
@@ -147,7 +147,7 @@ Activate the changes to the .vimrc file by typing:
 source .vimrc
 ```
 
-10. Change the bash preferences file to always use vim instead of vi (see 'External reference 1' for advantages).
+10. Change the bash preferences file to always use vim instead of vi (see 'External reference ii' for advantages).
 
 ```
 cd
@@ -196,7 +196,7 @@ sudo /etc/init.d/ssh restart
 14. Verify you can still login by opening a new terminal and typing:
 
 ```
-ssh -p[your_sshd_port] root@[your_server_ip-addres]
+ssh -p[your_sshd_port] [your_username]@[your_server_ip-addres]
 ```
 
 15. We are now ready to configure the firewall rules allowing you to manage your server using SSH and your server to communicate with the rest of the OXY network. The easiest way is to put the rules in a script by typing the following commands:
@@ -238,13 +238,57 @@ sudo ./firewall_rules.sh
 After the script has executed it will display the firewall rules activated and these rules will be persistant. It's important to verify you can still login to your server with the firewall active so open a new terminal and login again:
 
 ```
-ssh -p[your_sshd_port] root@[your_server_ip-address]
+ssh -p[your_sshd_port] [your_username]@[your_server_ip-address]
 ```
+
+Exit all your login sessions:
+
+```
+exit
+```
+
+You are all set and you can proceed to the guide for installing the node
+
+
+## Advanced options
+
+If you don't want to type your password every time you login to your server you can configure PublicKeyAuthentication for SSH. Besides the fact it's more secure, it's very convenient as you don't have to type your password anymore which also allows for easier automation of management tasks e.g. local backups of your server/node configuration. 
+
+17. Start by generating a SSH keypair (if you don't already have a keypair) on your local machine:
+
+```
+ssh-keygen
+```
+
+This will generate, by default, a RSA keypair named id_rsa and id_rsa.pub. The id_rsa file is your private key and should never be distributed to machines you don't own. The id_rsa.pub is your public key and can freely be distributed for your needs. 
+
+Your public key needs to copied onto your server in the users home SSH directory e.g. /home/user/.ssh/authorized_keys
+
+
+18.1 On Linux distributions there's a tool available for copying your public key to the server, adding it to the users authorized_keys file and setting the correct permissions:
+
+```
+ssh-copy-id -i ~/.ssh/id_rsa -p[your_sshd_port] [your_username]@[your_server_ip-address]
+```
+
+18.2 On MacOSX/Windows this tool is not available by default. Open the id_rsa.pub you created in a text-editor and copy the contents to the clipboard on your machine. To copy the key to the authorized_keys file, login to your server and type the following commands:
+
+```
+ssh -p[your_sshd_port] [your_username]@[your_server_ip-address]
+mkdir .ssh
+chmod 700 .ssh
+vi .ssh/authorized_keys
+```
+Now press i for insert mode and paste the contents of your clipboard holding the id_rsa.pub to this file. Exit vi 
+
+
+sessions
 
 
 ## External references
 
-* 1. <a href="https://vimhelp.appspot.com/vim_faq.txt.html#faq-1.4" target="_blank">vim over vi advantages</a>
+* 1. <a href="http://silverwraith.com/papers/vi-quickref.txt" target="_blank">A vi quick reference card</a>
+* 2. <a href="https://vimhelp.appspot.com/vim_faq.txt.html#faq-1.4" target="_blank">Some advantages in using vim over vi</a>
 
 
 ## Acknowledgments
