@@ -135,8 +135,7 @@ If this doesn't happen your user doesn't have the required sudo privileges (retu
 sudo apt-get install vim iptables git
 ```
 
-9. Configure your editing preferences. Assuming you will continu using vi/vim, create a vimrc file 
-    (see 'External reference i' for a vi/vim quick reference card):
+9. Configure your editing preferences. Assuming you will continu using vi/vim, create a vimrc file (please refer to 'External reference i' for a vi/vim quick reference card):
 ```
 cd
 vi .vimrc
@@ -154,7 +153,7 @@ Activate the changes to the .vimrc file by typing:
 source .vimrc
 ```
 
-10. Change the bash preferences file to always use vim instead of vi (see 'External reference ii' for advantages).
+10. Change the bash preferences file to always use vim instead of vi (please refer to 'External reference ii' for advantages).
 
 ```
 cd
