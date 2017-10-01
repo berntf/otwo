@@ -318,7 +318,7 @@ And make sure the following line is present and not commented:
 PubkeyAuthentication yes
 ```
 
-20. If you want to further secure SSH by only allowing [your_username] to login usign a public key only make sure the following lines are also present in the sshd_config file:
+20. If you want to further secure SSH by only allowing [your_username] to login using a public key only make sure the following lines are also present in the sshd_config file:
 
 ```
 PermitRootLogin no
