@@ -1,6 +1,6 @@
 ## Preparing your server for testnet
 
-These instructions will guide you through the steps preparing a server for the Oxycoin testnet network. After you're done with these preparations, please continue with the testnet installation for a Oxycoin testnet node. 
+These instructions will guide you through the steps preparing a server for the OXY testnet or mainnet network. After you're done with these preparations, please continue with the testnet/mainnet installation for an OXY node. 
 
 ### Prerequisites
 
@@ -8,9 +8,9 @@ To complete this tutorial, you will need:
 
 * A Linux server with preferably Ubuntu 16.04 with at least 2 GB memory and 20 GB storage. 
 
-* Some knowledge of how to work with command line tools in a terminal such as Putty on Windows or Terminal on Linux/MacOSX. 
+* Some knowledge of how to work with command line tools in a terminal session such as Putty on Windows or Terminal on Linux/MacOSX. 
 
-### Prerequisite verification (proceed to 'Installation' if known)
+### Prerequisite verification (proceed to 'Installation' if you know the prerequisites are met)
 
 0. Login to your server:
 
@@ -18,7 +18,7 @@ To complete this tutorial, you will need:
 ssh username@[your_server_ip-address]
 ```
 
-To check your linux distribution you can use (on the command line):
+To check your linux distribution you can use:
 
 ```
 cat /etc/issue
@@ -68,7 +68,7 @@ Look at the column 'Mounted on' for the single / which indicates your used and a
 
 ### Installation
 
-The installation document assumes you're installing a new server without (sudo) users already configured. If you do already have a sudo user configured on your server, you can replace all commands executed by root below with: sudo [command]
+The installation document assumes you're installing a new server without (sudo) users already configured. If you do already have a sudo user configured on your server, you can login with this user and replace all commands executed by root below with: sudo [command]
 
 1. To start login to your server with the root user:
 
@@ -76,7 +76,7 @@ The installation document assumes you're installing a new server without (sudo) 
 ssh root@[your_server_ip-address]
 ```
 
-2. Now update and upgrade your system to the latest repositories:
+2. Update and upgrade your system to the latest repositories:
 
 ```
 apt-get update
@@ -84,7 +84,7 @@ apt-get upgrade
 apt-get dist-upgrade
 ```
 
-3. After this has completed it's time to setup your main user with sudo privileges. Add the user chosing your username:
+3. After this has completed it's time to setup your main user with sudo privileges. Add the user choosing your username:
 
 ```
 useradd -d /home/[your_username] -m -s /bin/bash [your_username]
@@ -121,7 +121,7 @@ User [your_username] may run the following commands on [your hostname]:
     (ALL : ALL) ALL
 ```
 
-If this doesn't happen your user doesn't have the required sudo privileges (return to step 5).
+If this doesn't happen your user doesn't have the required sudo privileges (return to step 5)
 
 8. Now install the packages required for the remainder of the installation process.
 
@@ -129,7 +129,7 @@ If this doesn't happen your user doesn't have the required sudo privileges (retu
 sudo apt-get install vim iptables git
 ```
 
-9. Configure your editing preferences. Assuming you will continu using vi(m), create a vimrc file (see 'External reference i' for a vi/vim quick reference card):
+9. Configure your editing preferences. Assuming you will continu using vi/vim, create a vimrc file (see 'External reference i' for a vi/vim quick reference card):
 ```
 cd
 vi .vimrc
@@ -153,7 +153,7 @@ source .vimrc
 cd
 vi .bashrc 
 ```
-Add the following line to the .bashrc file:
+Add the following line to the .bashrc file (by default there's an aliases section by anywhere will work fine):
 ```
 alias vi='vim'
 ```
@@ -171,7 +171,7 @@ source .bashrc
 ```
 sudo vi /etc/ssh/sshd_config
 ```
-Find the line stating the port number most likely looking like this:
+Find the line stating the port number looking like this:
 ```
 #Port 22
 ```
@@ -205,7 +205,7 @@ ssh -p[your_sshd_port] [your_username]@[your_server_ip-addres]
 cd
 vi firewall_rules.sh
 ```
-Paste the following lines in the firewall_rules.sh script file (replace the [your_sshd_port] variable with the port number chosen in step 11):
+15.1 For testnet paste the following lines in the firewall_rules.sh script file (replace the [your_sshd_port] variable with the port number chosen in step 11):
 ```
 #!/bin/bash
 iptables -F
@@ -214,6 +214,22 @@ iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p tcp --dport [your_sshd_port] -j ACCEPT
 iptables -A INPUT -p tcp --dport 9998 -j ACCEPT
 iptables -A INPUT -p tcp --dport 9999 -j ACCEPT
+iptables -A INPUT -j DROP
+iptables -I INPUT 1 -i lo -j ACCEPT
+
+iptables -L -v -n
+sh -c "iptables-save > /etc/iptables.rules"
+```
+
+15.2 For mainnet paste the following lines in the firewall_rules.sh script file (replace the [your_sshd_port] variable with the port number chosen in step 11):
+```
+#!/bin/bash
+iptables -F
+
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -p tcp --dport [your_sshd_port] -j ACCEPT
+iptables -A INPUT -p tcp --dport 10000 -j ACCEPT
+iptables -A INPUT -p tcp --dport 10001 -j ACCEPT
 iptables -A INPUT -j DROP
 iptables -I INPUT 1 -i lo -j ACCEPT
 
@@ -247,12 +263,12 @@ Exit all your login sessions:
 exit
 ```
 
-You are all set and you can proceed to the guide for installing the node
+You are all set up and you can proceed to the guide for installing the node
 
 
 ## Advanced options
 
-If you don't want to type your password every time you login to your server you can configure PublicKeyAuthentication for SSH. Besides the fact it's more secure, it's very convenient as you don't have to type your password anymore which also allows for easier automation of management tasks e.g. local backups of your server/node configuration. 
+If you don't want to type your password every time you login to your server you can configure PublicKey Authentication for SSH. Besides the fact it's more secure, it's very convenient as you don't have to type your password anymore
 
 17. Start by generating a SSH keypair (if you don't already have a keypair) on your local machine:
 
@@ -260,7 +276,7 @@ If you don't want to type your password every time you login to your server you 
 ssh-keygen
 ```
 
-This will generate, by default, a RSA keypair named id_rsa and id_rsa.pub. The id_rsa file is your private key and should never be distributed to machines you don't own. The id_rsa.pub is your public key and can freely be distributed for your needs. 
+This will generate, by default, a RSA keypair named id_rsa and id_rsa.pub. The id_rsa file is your private key and should never be distributed to machines you don't own. The id_rsa.pub is your public key and can freely be distributed for your needs
 
 Your public key needs to copied onto your server in the users home SSH directory e.g. /home/user/.ssh/authorized_keys
 
@@ -277,13 +293,14 @@ ssh-copy-id -i ~/.ssh/id_rsa -p[your_sshd_port] [your_username]@[your_server_ip-
 ssh -p[your_sshd_port] [your_username]@[your_server_ip-address]
 
 mkdir .ssh
-chmod 700 .ssh
+chmod 700 .ssh/
+chown [your_username]:[your_username] .ssh/
 vi .ssh/authorized_keys
 ```
 
 Now paste the contents of your clipboard holding the id_rsa.pub to this file and exit vi by hitting ESC and then typing :wq (and hitting ENTER afterwards)
 
-By default SSH allows public key authentication, let's make sure it does:
+19. By default SSH allows PublicKey Authentication but let's make sure it does:
 
 ```
 sudo vi /etc/ssh/sshd_config
@@ -295,7 +312,7 @@ And make sure the following line is present and not commented:
 PubkeyAuthentication yes
 ```
 
-If you want to further secure SSH by only allowing [your_username] to login usign a public key only make sure the following lines are also present in the sshd_config file:
+20. If you want to further secure SSH by only allowing [your_username] to login usign a public key only make sure the following lines are also present in the sshd_config file:
 
 ```
 PermitRootLogin no
@@ -309,14 +326,17 @@ Make sure you replace [your_username] with the username you want to allow loggin
 sudo /etc/init.d/ssh restart
 ```
 
-It's very important to verify you can still login to your server (now using public key authentication) so open a new terminal and login again:
+21. It's very important to verify you can still login to your server (now using PublicKey Authentication) so open a new terminal and login again:
 
 ```
 ssh -i ~/.ssh/id_rsa -p[your_sshd_port] [your_username]@[your_server_ip-address]
 ```
 
+22. If you can login succesfully using PublicKey Authentication, exit all login sessions and continue installing the OXY node
 
-sessions
+```
+exit
+```
 
 
 ## External references
